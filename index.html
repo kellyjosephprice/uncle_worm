@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Uncle Worm</title>
+  
+  <script type="text/javascript" src="lib/keymaster.js"></script>
+  
+  <script type="text/javascript" src="lib/utils.js"></script>
+  <script type="text/javascript" src="lib/game.js"></script>
+  <script type="text/javascript" src="lib/gameView.js"></script>
+
+  <link href="uncle_worm.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>  
+  <main>
+    <canvas id="game-canvas" width="960" height="640">
+    </canvas>
+  </main>
+  
+  <script>
+    var canvas = document.getElementById('game-canvas');
+    var game = new UncleWorm.Game();
+    var gameView = new UncleWorm.GameView(
+      game,
+      canvas.getContext("2d")
+    );
+    
+    gameView.start();
+  </script>
+</body>
+</html>
