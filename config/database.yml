@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: uncle_worm_development
+  pool: 5
+  username: rails
+  password:
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: uncle_worm_test
+  pool: 5
+  username: rails
+  password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: uncle_worm_production
+  pool: 5
+  username: uncle_worm
+  password: 
