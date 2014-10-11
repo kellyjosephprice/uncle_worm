@@ -2,7 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 main {
-  width: 960px;
-  height: 960px;
-  margin: 0 auto;
+    background-image: url("ti83.png");
+    width: 793px;;
+    height: 1772px;
+    margin: 0 auto;
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    top: 198px;
+    left: 150px;
 }

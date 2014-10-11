@@ -44,4 +44,8 @@
       Math.floor(this[1])
     ];
   };
+  
+  Array.prototype._uw_stringify = function () {
+    return "x:" + this[0] + " y:" + this[1];
+  };
 })();

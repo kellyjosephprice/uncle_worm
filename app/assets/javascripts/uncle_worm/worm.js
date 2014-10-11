@@ -9,6 +9,7 @@
     this.nextAngle = 3 * Math.PI / 2;
 
     this.tail = [ options.pos ];
+    this.pixels = {};
   };
 
   // 32 angles === 2 * Math.PI / 32
@@ -17,6 +18,10 @@
   Worm.prototype.head = function () {
     return this.tail[0];
   };
+
+  Worm.prototype.grow = function (amount) {
+    this.length += amount * 6;
+  }
 
   Worm.prototype.left = function () {
     this.nextAngle = this.angle - Worm.MOVE_INC;
