@@ -14,5 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require underscore
-//= require_tree ./uncle_worm
+
+//= require uncle_worm/utils
+//= require uncle_worm/vector
+//= require uncle_worm/sprite
+//= require uncle_worm/apple
+//= require uncle_worm/worm
+//= require uncle_worm/game
+//= require uncle_worm/key
+//= require uncle_worm/gameView
+
 //= require_tree .

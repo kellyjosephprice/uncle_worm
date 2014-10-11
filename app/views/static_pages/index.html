@@ -11,14 +11,16 @@
   </main>
   
   <script>
-    var canvas = document.getElementById('game-canvas');
-    var game = new UncleWorm.Game();
-    var gameView = new UncleWorm.GameView(
-      game,
-      canvas.getContext("2d")
-    );
-    
-    gameView.start();
+    $(function () {
+        var canvas = document.getElementById('game-canvas');
+        var game = new UncleWorm.Game();
+        var gameView = new UncleWorm.GameView(
+          game,
+          canvas.getContext("2d")
+        );
+        
+        gameView.start();
+    });
   </script>
 </body>
 </html>

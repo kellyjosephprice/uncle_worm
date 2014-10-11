@@ -4,8 +4,16 @@
   }
   
   var Apple = UncleWorm.Apple = function (options) {
-    this.size = Math.floor(Math.random() * 5 + 5);
-    this.pixels = {};
+    UncleWorm.Sprite.call(this, options);
+
+    this.size = Math.floor(Math.random() * 5 + 4);
+    this.pos = options.randomPosition(this.size);
+  };
+
+  Apple.inherits(UncleWorm.Sprite);
+
+  Apple.prototype.bitmap = function () {
+    return Apple.BITMAPS[this.size];
   };
 
   Apple.BITMAPS = [
