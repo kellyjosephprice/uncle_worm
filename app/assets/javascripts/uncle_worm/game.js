@@ -37,7 +37,10 @@
     this.apple = new UncleWorm.Apple({
       randomPosition: this.randomApplePos.bind(this),
     });
-    console.log("new apple: " + this.apple.pos);
+
+    if (this.apple.collidedWith(this.worm)) {
+      this.newApple();
+    }
   };
 
   Game.prototype.draw = function (ctx, background) {
@@ -112,7 +115,6 @@
     var game = this;
     this.step = function () {};
 
-    debugger;
     console.log("Game Over");
 
     setTimeout(function () {

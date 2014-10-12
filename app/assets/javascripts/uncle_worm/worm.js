@@ -8,7 +8,7 @@
 
     this.length = 24;
     this.angle = 3 * Math.PI / 2;
-    this.nextAngle = 3 * Math.PI / 2;
+    this.nextAngle = this.angle;
 
     this.tail = [{
       real: options.pos,

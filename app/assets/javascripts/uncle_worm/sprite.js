@@ -27,4 +27,15 @@
 
     return this._pixels;
   };
+
+  Sprite.prototype.collidedWith = function (other) {
+    var other_pixels = other.pixels();
+    var collided = false;
+
+    _(this.pixels()).each(function (pixel, digest) {
+      if (other_pixels.hasOwnProperty(digest)) collided = true;
+    });
+
+    return collided;
+  };
 })();
