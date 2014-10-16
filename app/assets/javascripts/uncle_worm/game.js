@@ -53,7 +53,7 @@
       randomPosition: this.randomApplePos.bind(this),
     });
 
-    if (this.apple.collidedWith(this.worm)) {
+    while (this.apple.collidedWith(this.worm)) {
       this.apple = new UncleWorm.Apple({
         randomPosition: this.randomApplePos.bind(this),
       });
@@ -127,8 +127,6 @@
       this.newLevel();
       return;
     };
-
-    console.log(this.level_offset, this.wall_x, this.wall_x2);
 
     if (head.x <= Game.PIXEL_SIZE + this.level_offset || 
         head.x >= Game.USABLE_X + this.level_offset || 

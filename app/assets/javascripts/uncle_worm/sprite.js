@@ -35,7 +35,7 @@
     _(this.pixels()).each(function (pixel, digest) {
       if (other_pixels.hasOwnProperty(digest)) collided = true;
     });
-
+    
     return collided;
   };
 })();
