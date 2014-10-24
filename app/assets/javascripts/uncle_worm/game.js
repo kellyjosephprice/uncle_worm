@@ -21,7 +21,7 @@
 
   Game.FG_COLOR      = "#2e3b1f";
 
-  Game.FPS           = 30;
+  Game.FPS           = 40;
 
   Game.INITIAL_POS   = new UncleWorm.Vector({ x: 48, y: 62 });
   Game.APPLES        = 10;

@@ -1,6 +1,16 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+    font-family: "TI-83 Plus Regular";
+    src: url("ti83_plus.eot?") format("eot"),
+         url("ti83_plus.woff") format("woff"),
+         url("ti83_plus.ttf") format("truetype"),
+         url("ti83_plus.svg#TI-83-Plus") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
 main {
     background-image: url("ti83.png");
     width: 793px;;
