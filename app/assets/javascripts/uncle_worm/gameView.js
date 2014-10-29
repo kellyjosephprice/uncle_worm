@@ -7,15 +7,29 @@
     this.game = game;
     this.worm = game.worm;
     this.context = drawingContext;
+    
+    this.bindKeyHandlers();
+  };
+
+  GameView.prototype.menu = function () {
   };
   
   GameView.prototype.start = function () {
-    this.bindKeyHandlers();
-    
-    setInterval(function() {
+    this.runningGame = setInterval(function() {
       this.game.step(this.handleKeys.bind(this));
       this.game.draw(this.context);
+
+      if (this.game.completed) this.newLevel();
+      if (this.game.lost) this.gameOver();
     }.bind(this), 1000 / UncleWorm.Game.FPS);
+  };
+
+  GameView.prototype.newLevel = function () {
+    this.clearInterval(this.runningGame);
+  };
+
+  GameView.prototype.gameOver = function () {
+    this.clearInterval(this.runningGame);
   };
   
   GameView.prototype.bindKeyHandlers = function () {

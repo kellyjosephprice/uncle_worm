@@ -16,7 +16,3 @@ gem 'underscore-rails'
 group :test, :development do
   gem 'jasmine-rails'
 end
-
-group :staging, :production do
-  gem 'rails_12factor'
-end

@@ -21,7 +21,7 @@
 
   Game.FG_COLOR      = "#2e3b1f";
 
-  Game.FPS           = 40;
+  Game.FPS           = 50;
 
   Game.INITIAL_POS   = new UncleWorm.Vector({ x: 48, y: 62 });
   Game.APPLES        = 10;
@@ -40,6 +40,8 @@
 
     this.apple_count = Game.APPLES;
     this.door        = false;
+    this.completed   = false;
+    this.lost        = false
 
     this.worm = new UncleWorm.Worm({ 
       pos: Game.INITIAL_POS,
@@ -111,12 +113,18 @@
       down: function () {},
       left:  this.worm.left.bind(this.worm)
     });
-    if (!this.worm.move()) this.gameOver();
+
+    if (!this.worm.move()) {
+      this.lost = true;
+      return;
+    }
     
     this.handleCollisions();
     this.handleApple();
 
-    if (this.apple_count === 0) this.openDoor();
+    if (this.apple_count === 0) {
+      this.openDoor();
+    }
   };
 
   Game.prototype.handleCollisions = function () {
@@ -124,14 +132,11 @@
 
     if (this.door && head.y <= Game.PIXEL_SIZE && 
         head.x >= 44 * Game.PIXEL_SIZE && head.x <= 51 * Game.PIXEL_SIZE) {
-      this.newLevel();
-      return;
-    };
-
-    if (head.x <= Game.PIXEL_SIZE + this.level_offset || 
+      this.completed = true;
+    } else if (head.x <= Game.PIXEL_SIZE + this.level_offset || 
         head.x >= Game.USABLE_X + this.level_offset || 
         head.y <= Game.PIXEL_SIZE || head.y >= Game.USABLE_Y) {
-      this.gameOver();
+      this.lost = true;
     }
   };
 
