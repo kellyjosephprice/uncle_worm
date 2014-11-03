@@ -6,6 +6,7 @@
   var Game = UncleWorm.Game = function () { 
     this.score = 0;
     this.level = 0;
+    this.remainingApples = 0;
 
     this.init();
   };
@@ -24,7 +25,7 @@
   Game.FPS           = 50;
 
   Game.INITIAL_POS   = new UncleWorm.Vector({ x: 48, y: 62 });
-  Game.APPLES        = 10;
+  Game.APPLES        = 2;
 
   Game.nearestPixel = function (pos) {
     return pos.floor().multiply(Game.PIXEL_SIZE);
@@ -38,8 +39,6 @@
     this.wall_x2 = Game.USABLE_X - 2 * this.level_offset;
     this.wall_y2 = Game.USABLE_Y;
 
-    this.apple_count = Game.APPLES;
-    this.door        = false;
     this.completed   = false;
     this.lost        = false
 
@@ -48,6 +47,7 @@
     });
 
     this.newApple();
+    this.remainingApples = Game.APPLES;
   };
   
   Game.prototype.newApple = function () {
@@ -61,7 +61,7 @@
       });
     }
 
-    this.apple_count -= 1;
+    this.remainingApples -= 1;
   };
 
   Game.prototype.draw = function (ctx, background) {
@@ -70,7 +70,8 @@
     ctx.globalAlpha = 1;
 
     this.drawBorder(ctx);
-    this.drawSprites(ctx, this.worm, this.apple);
+    this.drawSprites(ctx, this.worm);
+    if (!this.isDoorOpen()) this.drawSprites(ctx, this.apple)
   };
 
   Game.prototype.drawBorder = function (ctx) {
@@ -80,7 +81,7 @@
     ctx.strokeStyle = Game.FG_COLOR;
     ctx.stroke();
 
-    if (this.door) {
+    if (this.isDoorOpen()) {
       ctx.globalAlpha = 0;
       ctx.clearRect(44 * Game.PIXEL_SIZE, 0, 8 * Game.PIXEL_SIZE, Game.PIXEL_SIZE);
       ctx.globalAlpha = 1;
@@ -121,16 +122,12 @@
     
     this.handleCollisions();
     this.handleApple();
-
-    if (this.apple_count === 0) {
-      this.openDoor();
-    }
   };
 
   Game.prototype.handleCollisions = function () {
     var head = this.worm.head();
 
-    if (this.door && head.y <= Game.PIXEL_SIZE && 
+    if (this.isDoorOpen() && head.y <= Game.PIXEL_SIZE && 
         head.x >= 44 * Game.PIXEL_SIZE && head.x <= 51 * Game.PIXEL_SIZE) {
       this.completed = true;
     } else if (head.x <= Game.PIXEL_SIZE + this.level_offset || 
@@ -141,44 +138,29 @@
   };
 
   Game.prototype.handleApple = function () {
+    if (this.isDoorOpen()) return;
+
     var head = this.worm.head();
 
     if (this.apple.pixels().hasOwnProperty(head.toString())) {
       this.worm.grow(this.apple.size);
-      this.newApple();
+
+      if (!this.isDoorOpen()) {
+        this.newApple();
+      } else {
+        this.apple = undefined;
+      }
     }
   };
 
-  Game.prototype.openDoor = function () {
-    this.door = true;
+  Game.prototype.isDoorOpen = function () {
+    return this.remainingApples === 0;
   };
 
   Game.prototype.newLevel = function () {
-    var step = this.step;
-    var game = this;
-    this.step = function () {};
-
     console.log("New Level");
-
-    setTimeout(function () {
-      game.level += 1;
-      game.init();
-      game.step = step;
-    }, 500);
-  };
-
-  Game.prototype.gameOver = function () {
-    var step = this.step;
-    var game = this;
-    this.step = function () {};
-
-    console.log("Game Over");
-
-    setTimeout(function () {
-      game.level = 0;
-      game.init();
-      game.step = step;
-    }, 500);
+    this.level += 1;
+    this.init();
   };
 
   Game.prototype.randomApplePos = function (size) {

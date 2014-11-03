@@ -6,17 +6,17 @@
 </head>
 <body>  
   <main>
-    <canvas id="game-canvas" width="672" height="448">
-    </canvas>
+    <div id="game-canvas">
+    </div>
   </main>
   
   <script>
     $(function () {
-        var canvas = document.getElementById('game-canvas');
+        var element = document.getElementById('game-canvas');
         var game = new UncleWorm.Game();
         var gameView = new UncleWorm.GameView(
           game,
-          canvas.getContext("2d")
+          element
         );
         
         gameView.start();
