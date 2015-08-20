@@ -80,7 +80,7 @@
     var x_diff = head.x - next.x;
     var y_diff = head.y - next.y;
     
-    if (Math.abs(x_diff) === 1 && Math.abs(x_diff) === 1) {
+    if (Math.abs(x_diff) === 1 && Math.abs(y_diff) === 1) {
       var corner_1 = new Vector({ x: head.x, y: next.y });
       var corner_2 = new Vector({ x: next.x, y: head.y });
 
